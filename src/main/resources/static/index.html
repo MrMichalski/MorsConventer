@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="main.css" media="screen" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<h1 class="nagl">Praca zaliczeniowa Mateusz Michalski</h1>
+
+<form id="morsForm">
+    <label class="label" for="doMorsa">Text do zmiany na kod MORSEA</label>
+    <br>
+    <br>
+    <textarea class="css-input focus" cols="50" id="doMorsa" placeholder="Wpisz dane do zakodowania"
+              rows="4"></textarea>
+    <br>
+    <br>
+    <button class="button" type="submit">Zmień</button>
+</form>
+<br>
+<br>
+<br> <br> <br> <br>
+<label class="label" for="mors">Zmieniony tekst na MORSEA:</label>
+<br>
+<br>
+<textarea class="css-input focus" cols="50" id="mors" rows="4"></textarea>
+<br>
+<br>
+
+<button class="button" id="reset" type="button">Wyczyść</button>
+
+<script>
+    $(document).ready(function () {
+        $("#reset").click(function () {
+            $("#doMorsa").val('');
+            $("#mors").val('');
+            }
+        );
+
+        $("#morsForm").submit(function (event) {
+
+            event.preventDefault();
+            ajaxPost();
+        });
+
+
+        function ajaxPost() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: window.location + "test",
+                data: $('#doMorsa').val(),
+                dataType: 'text',
+
+                success: function (result) {
+                    $("#mors").val(result);
+                },
+            });
+        }
+    })
+</script>
+</body>
+</html>
